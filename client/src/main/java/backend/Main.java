@@ -1,7 +1,7 @@
 package client;
 
 import com.google.gson.Gson;
-import backend.Email; // Assuming Email record is in the package backend and accessible from here
+import model.Email; // Assuming Email record is in the package backend and accessible from here
 
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
