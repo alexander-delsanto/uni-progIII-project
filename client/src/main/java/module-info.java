@@ -11,4 +11,5 @@ module client {
     opens backend to com.google.gson;
     exports frontend.component;
     opens frontend.component to javafx.fxml;
+    opens model to com.google.gson;
 }
