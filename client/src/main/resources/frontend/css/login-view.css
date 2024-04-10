@@ -1,0 +1,13 @@
+.title{
+    -fx-font-weight: bold;
+    -fx-font-size: 30;
+}
+
+.subtitle{
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+#usernameField{
+    -fx-max-width: 200px;
+}
