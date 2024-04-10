@@ -9,10 +9,6 @@ public class StatusBarController {
     @FXML private Label statusLabel;
     private StatusBar statusBar;
 
-    @FXML private void initialize() {
-
-    }
-
     public void setStatusBar(StatusBar statusBar) {
         this.statusBar = statusBar;
         userLabel.textProperty().bind(statusBar.userProperty());

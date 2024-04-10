@@ -21,6 +21,7 @@ public class MainViewController {
         statusBarController.setUser("clicked " + i + " times");
         statusBarController.setStatus("Modified " + i + " times");
     }
+
     @FXML
     public void changeTab() {
 
