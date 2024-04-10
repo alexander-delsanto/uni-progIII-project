@@ -1,25 +1,21 @@
 package frontend;
 
-import backend.Email;
+import model.Email;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import model.StatusBar;
+import model.UserData;
 
 public class MainViewController {
     @FXML private ListView<Email> inboxListView;
     @FXML private ListView<Email> outboxListView;
-    @FXML private StatusBarController statusBarController;
+    private final UserData userData = UserData.getInstance();
     private int i = 0;
 
-    public void setStatusBar(StatusBar statusBar) {
-        this.statusBarController.setStatusBar(statusBar);
-    }
 
     @FXML
     public void handleButtonClick() {
-        i++;
-        statusBarController.setUser("clicked " + i + " times");
-        statusBarController.setStatus("Modified " + i + " times");
+        userData.setName("clicked " + ++i + " times");
+        userData.setStatus("Modified " + i + " times");
     }
 
     @FXML

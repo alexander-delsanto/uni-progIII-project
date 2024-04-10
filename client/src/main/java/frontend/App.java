@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.StatusBar;
 
 import java.io.IOException;
 
@@ -25,13 +24,6 @@ public class App extends Application {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
         Scene scene = new Scene(loader.load());
-        MainViewController mainController = loader.getController();
-
-        StatusBar statusBar = new StatusBar();
-        statusBar.setUser("User");
-        statusBar.setStatus("Status");
-
-        mainController.setStatusBar(statusBar);
 
         stage.setScene(scene);
         stage.show();
