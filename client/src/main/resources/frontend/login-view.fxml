@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="frontend.LoginController"
+      alignment="CENTER">
+    <Label text="Welcome! Please login with your existing email or create a new one."/>
+    <TextField/>
+    <BorderPane>
+        <left>
+            <Button text="Register"/>
+        </left>
+        <right>
+            <Button text="Login"/>
+        </right>
+    </BorderPane>
+</VBox>
