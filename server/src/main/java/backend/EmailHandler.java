@@ -19,6 +19,7 @@ public class EmailHandler implements Runnable {
             Gson gson = new Gson();
             Email email = gson.fromJson(reader.readLine(), Email.class);
             System.out.println("Received email from " + email.sender());
+            System.out.println(email);
             processEmail(email);
 
         } catch (Exception e) {
@@ -30,28 +31,38 @@ public class EmailHandler implements Runnable {
 
     public void processEmail(Email email) {
         for (String recipient : email.recipients()) {
-            File userFile = new File(recipient + ".json");
-
+            File recipientFile = new File("emails/" + recipient + ".json");
             try {
-                if (!userFile.exists()) {
-                    userFile.createNewFile();
-                }
-
-                appendEmailToFile(userFile, email);
+                saveEmailToFile(recipientFile, email);
             } catch (IOException e) {
+                System.out.println("Failed to save email for recipient: " + recipient);
                 e.printStackTrace();
             }
         }
+
+        File senderFile = new File("emails/" + email.sender() + ".json");
+        try {
+            saveEmailToFile(senderFile, email);
+        } catch (IOException e) {
+            System.out.println("Failed to save email for sender: " + email.sender());
+            e.printStackTrace();
+        }
+    }
+
+    public void saveEmailToFile(File userFile, Email email) throws IOException {
+        if (!userFile.exists()) {
+            userFile.createNewFile();
+        }
+        appendEmailToFile(userFile, email);
     }
 
     public void appendEmailToFile(File userFile, Email email) throws IOException {
         Gson gson = new Gson();
-        try (FileWriter fw = new FileWriter(userFile, true)) {
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter out = new PrintWriter(bw); {
-                String emailJson = gson.toJson(email);
-                out.println(emailJson);
-            }
+        try (FileWriter fw = new FileWriter(userFile, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+            String emailJson = gson.toJson(email);
+            out.println(emailJson);
         }
     }
 }

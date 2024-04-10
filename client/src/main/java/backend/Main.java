@@ -1,49 +1,37 @@
-package backend;
-
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Date;
+package client;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import backend.Email; // Assuming Email record is in the package backend and accessible from here
+
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.Arrays;
+import java.util.Date;
 
 public class Main {
+
     public static void main(String[] args) {
-        String sender = "test@test.com";
-        ArrayList<String> recipient = new ArrayList<>();
-        recipient.add("user@test.com");
-        String subject = "Test email";
-        String body = "Hello, World!";
-        Mail mail = new Mail(sender, recipient, subject, body, new Date());
+        String serverAddress = "localhost";
+        int serverPort = 12345;
 
-        Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm:ss").create();
-        String json = gson.toJson(mail);
-        System.out.println(json);
+        Email email = new Email("sender@example.com", Arrays.asList("recipient1@example.com", "recipient2@example.com"), "Test Subject", "This is a test body", new Date());
 
-/*        try {
-            ObjectOutputStream out;
-            ObjectInputStream in;
-            try (Socket socket = new Socket("localhost", 12345)) {
-                System.out.println("Connection established.");
+        try (Socket socket = new Socket(serverAddress, serverPort)) {
+            System.out.println("Connected to the email server");
 
-                out = new ObjectOutputStream(socket.getOutputStream());
-                in = new ObjectInputStream(socket.getInputStream());
+            Gson gson = new Gson();
+            String emailJson = gson.toJson(email);
+
+            try (PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true)) {
+                out.println(emailJson);
+                System.out.println("Email sent: " + emailJson);
             }
 
-            String sender = "test@test.com";
-            ArrayList<String> recipient = new ArrayList<>();
-            recipient.add("user@test.com");
-            String body = "Hello, World!";
-            Mail mail = new Mail(sender, recipient, body, null, null);
-            out.writeObject(mail);
-            System.out.println(in.readObject());
-
-
         } catch (Exception e) {
+            System.out.println("Client exception: " + e.getMessage());
             e.printStackTrace();
         }
-        System.out.println("Client stopped."); */
     }
 }

@@ -4,6 +4,6 @@ module server {
     requires com.google.gson;
 
     exports frontend;
-    opens frontend to javafx.fxml;
     opens backend to com.google.gson;
+    opens frontend to com.google.gson, javafx.fxml;
 }

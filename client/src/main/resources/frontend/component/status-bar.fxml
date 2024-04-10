@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.StatusBarController">
+    <padding>
+        <Insets top="5" right="5" bottom="5" left="5"/>
+    </padding>
+    <left>
+        <HBox spacing="5">
+            <Label text="Logged in as:"/>
+            <Label fx:id="userLabel"/>
+        </HBox>
+    </left>
+    <right>
+        <HBox spacing="5">
+            <Label text="Status:"/>
+            <Label fx:id="statusLabel"/>
+        </HBox>
+    </right>
+</BorderPane>

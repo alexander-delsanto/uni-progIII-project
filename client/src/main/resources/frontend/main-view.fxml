@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.MainViewController">
+    <center>
+        <SplitPane dividerPositions="0.4">
+            <TabPane tabClosingPolicy="UNAVAILABLE" minWidth="200">
+                <Tab onSelectionChanged="#changeTab" text="Inbox">
+                    <ListView fx:id="inboxListView" onMouseClicked="#updateSelectedInbox"/>
+                </Tab>
+                <Tab onSelectionChanged="#changeTab" text="Outbox">
+                    <ListView fx:id="outboxListView" onMouseClicked="#updateSelectedOutbox"/>
+                </Tab>
+            </TabPane>
+
+            <BorderPane minWidth="300">
+                <center>
+                    <Button text="Click me!" onAction="#handleButtonClick"/>
+                </center>
+            </BorderPane>
+        </SplitPane>
+    </center>
+    <bottom>
+        <fx:include fx:id="statusBar" source="component/status-bar.fxml"/>
+    </bottom>
+</BorderPane>
