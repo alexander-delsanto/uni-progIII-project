@@ -9,7 +9,7 @@ public class UserData {
     public static synchronized UserData getInstance(){
         if(instance == null){
             instance = new UserData();
-            instance.setName("");
+            instance.setUser("");
             instance.setStatus("");
         }
 
@@ -27,7 +27,7 @@ public class UserData {
 
     public StringProperty statusProperty() { return status; }
 
-    public void setName(String user) { this.name.set(user); }
+    public void setUser(String user) { this.name.set(user); }
 
     public void setStatus(String status) { this.status.set(status); }
 }

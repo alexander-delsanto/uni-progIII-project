@@ -1,32 +1,43 @@
 package frontend;
 
+import frontend.util.StageWrapper;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
+import model.UserData;
 
 public class App extends Application {
-    private static final int WIDTH = 1600;
-    private static final int HEIGHT = 1000;
-    private Stage stage;
+    private static final int WIDTH = 550;
+    private static final int HEIGHT = 400;
+
+    private StageWrapper stageWrapper;
 
     @Override
-    public void start(Stage stage) throws IOException {
-        this.stage = stage;
-        // initialize the stage
-        stage.setTitle("Email client");
-        stage.setHeight(HEIGHT);
-        stage.setWidth(WIDTH);
-        stage.setMinWidth(500);
-        stage.setMinHeight(400);
+    public void start(Stage stage) {
+        this.stageWrapper = new StageWrapper(stage, "Login", WIDTH, HEIGHT);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
-        Scene scene = new Scene(loader.load());
+        loadScenes();
+        setParameters();
+        stageWrapper.open();
+    }
 
-        stage.setScene(scene);
-        stage.show();
+    public void loadScenes() {
+        LoginController loginController = stageWrapper.setRootAndGetController(getClass().getResource("login-view.fxml"));
+        if (loginController != null) {
+            loginController.loginAsUser(this::loadMainScene);
+        }
+    }
+
+    public void loadMainScene(String user) {
+        stageWrapper.setRootAndGetController(getClass().getResource("main-view.fxml"));
+        stageWrapper.setTitle("Email client");
+        UserData.getInstance().setUser(user);
+        stageWrapper.setWidth(1600);
+        stageWrapper.setHeight(900);
+    }
+
+    public void setParameters() {
+        stageWrapper.setIcon(getClass().getResource("assets/icon.png"));
+        stageWrapper.setOnCloseRequest(e -> System.exit(0));
     }
 
     public static void main(String[] args) {

@@ -8,6 +8,7 @@ module client {
     opens frontend to javafx.fxml;
     exports model;
 
+    exports interfaces;
     exports frontend.component;
     opens frontend.component to javafx.fxml;
     opens model to com.google.gson;

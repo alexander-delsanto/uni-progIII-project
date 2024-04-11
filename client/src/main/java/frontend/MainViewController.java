@@ -14,7 +14,7 @@ public class MainViewController {
 
     @FXML
     public void handleButtonClick() {
-        userData.setName("clicked " + ++i + " times");
+        userData.setUser("clicked " + ++i + " times");
         userData.setStatus("Modified " + i + " times");
     }
 

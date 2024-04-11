@@ -16,7 +16,7 @@ public class StatusBarController {
     }
 
     public void setUser(String name) {
-        userData.setName(name);
+        userData.setUser(name);
     }
 
     public void setStatus(String status) {
