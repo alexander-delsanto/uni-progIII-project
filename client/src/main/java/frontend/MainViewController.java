@@ -1,21 +1,22 @@
 package frontend;
 
-import model.Email;
+import backend.ServiceRequester;
+import model.message.EmailMessage;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import model.UserData;
 
 public class MainViewController {
-    @FXML private ListView<Email> inboxListView;
-    @FXML private ListView<Email> outboxListView;
+    @FXML private ListView<EmailMessage> inboxListView;
+    @FXML private ListView<EmailMessage> outboxListView;
     private final UserData userData = UserData.getInstance();
     private int i = 0;
 
 
     @FXML
     public void handleButtonClick() {
-        userData.setUser("clicked " + ++i + " times");
-        userData.setStatus("Modified " + i + " times");
+        /*ServiceRequester serviceRequester = new ServiceRequester();
+        serviceRequester.run();*/
     }
 
     @FXML

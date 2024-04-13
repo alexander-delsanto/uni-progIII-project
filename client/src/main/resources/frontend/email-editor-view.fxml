@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="frontend.EmailEditorController">
+
+    <top>
+        <VBox>
+            <HBox>
+                <Label text="From: "/>
+                <TextField fx:id="fromField" prefWidth="200" editable="false"/>
+            </HBox>
+            <HBox>
+                <Label text="To: "/>
+                <TextField fx:id="toField" prefWidth="200"/>
+            </HBox>
+            <HBox>
+                <Label text="Subject: "/>
+                <TextField fx:id="subjectField" prefWidth="200"/>
+            </HBox>
+        </VBox>
+    </top>
+    <center>
+        <VBox>
+            <Label text="Content: "/>
+            <HBox>
+                <TextField fx:id="bodyField" prefWidth="200"/>
+            </HBox>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox>
+            <Button text="Cancel" onAction="#cancel"/>
+            <Button text="Send" onAction="#send"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

@@ -7,9 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import java.io.IOException;
 import java.net.URL;
+import javafx.stage.Window;
 
 public class StageWrapper {
     private Stage stage;
@@ -58,6 +58,16 @@ public class StageWrapper {
             System.err.println(e.getMessage());
         }
         return null;
+    }
+
+    public void setModal(Window window) {
+        if (window == null) {
+            System.err.println("Window is null");
+            return;
+        }
+
+        this.stage.initOwner(window);
+        this.stage.initModality(javafx.stage.Modality.WINDOW_MODAL);
     }
 
     public void setOnCloseRequest(EventHandler<WindowEvent> handler) {

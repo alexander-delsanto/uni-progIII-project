@@ -19,6 +19,9 @@
                 <center>
                     <Button text="Click me!" onAction="#handleButtonClick"/>
                 </center>
+                <bottom>
+                    <fx:include fx:id="mailEditor" source="component/email-actions.fxml"/>
+                </bottom>
             </BorderPane>
         </SplitPane>
     </center>

@@ -8,6 +8,10 @@
     -fx-font-size: 14;
 }
 
+.error{
+    -fx-text-fill: red;
+}
+
 #usernameField{
     -fx-max-width: 200px;
 }

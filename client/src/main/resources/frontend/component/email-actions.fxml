@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="frontend.component.EmailActionsController" alignment="CENTER_RIGHT">
+
+    <Button onAction="#openEmailEditor" text="+" HBox.hgrow="ALWAYS">
+        <HBox.margin><Insets topRightBottomLeft="10.0"/></HBox.margin>
+    </Button>
+    <Button text="Reply" HBox.hgrow="ALWAYS">
+        <HBox.margin><Insets topRightBottomLeft="10.0"/></HBox.margin>
+    </Button>
+    <Button text="Reply All" HBox.hgrow="ALWAYS">
+        <HBox.margin><Insets topRightBottomLeft="10.0"/></HBox.margin>
+    </Button>
+    <Button text="Forward" HBox.hgrow="ALWAYS">
+        <HBox.margin><Insets topRightBottomLeft="10.0"/></HBox.margin>
+    </Button>
+    <Button text="🗑" >
+        <HBox.margin><Insets topRightBottomLeft="10.0"/></HBox.margin>
+    </Button>
+</HBox>
