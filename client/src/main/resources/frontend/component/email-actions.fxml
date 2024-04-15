@@ -7,7 +7,7 @@
 <HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       fx:controller="frontend.component.EmailActionsController" alignment="CENTER_RIGHT">
 
-    <Button onAction="#openEmailEditor" text="+" HBox.hgrow="ALWAYS">
+    <Button onAction="#openEmailEditor" text="New email" HBox.hgrow="ALWAYS">
         <HBox.margin><Insets topRightBottomLeft="10.0"/></HBox.margin>
     </Button>
     <Button text="Reply" HBox.hgrow="ALWAYS">

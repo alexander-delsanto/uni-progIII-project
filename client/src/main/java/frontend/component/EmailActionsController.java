@@ -1,5 +1,6 @@
 package frontend.component;
 
+import backend.Sender;
 import backend.ServiceRequester;
 import frontend.EmailEditorController;
 import frontend.MainViewController;
@@ -23,7 +24,7 @@ public class EmailActionsController {
     private void openWindow(Window owner) {
         StageWrapper stageWrapper = new StageWrapper(null, "Mail Editor", 650, 450);
         stageWrapper.setModal(owner);
-        stageWrapper.setIcon(MainViewController.class.getResource("images/icon.png"));
+        stageWrapper.setIcon(MainViewController.class.getResource("assets/icon.png"));
 
         EmailEditorController emailEditorController = stageWrapper.setRootAndGetController(MainViewController.class.getResource("email-editor-view.fxml"));
         emailEditorController.setMail(new Email(MailBox.getInstance().getUser(), null, null, null));
@@ -33,9 +34,15 @@ public class EmailActionsController {
     }
 
     public void handleEmail(Email email, StageWrapper stage, EmailEditorController emailEditorController) {
-        ServiceRequester serviceRequester = new ServiceRequester(MailBox.getInstance().getUser(), email);
+        ServiceRequester<String> serviceRequester;
+        serviceRequester = new Sender(MailBox.getInstance().getUser(), email);
+        serviceRequester.setEndStatusListener(errorString -> {
+            if (errorString != null) {
+                emailEditorController.setErrorLabel(errorString);
+                return;
+            }
+            stage.close();
+        });
         serviceRequester.run();
-        stage.close();
-
     }
 }

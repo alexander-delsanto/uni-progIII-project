@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 
 public class Server implements Runnable, Logger {
     private Logger logger;
-    //private final ExecutorService executorService = Executors.newFixedThreadPool(10);
+    private final ExecutorService executorService = Executors.newFixedThreadPool(10);
 
     private static Server serverInstance;
     public static Server getServer(Logger logger) {
@@ -30,37 +30,26 @@ public class Server implements Runnable, Logger {
     @Override
     public void run() {
         try (ServerSocket serverSocket = new ServerSocket(60000)) {
-            serverSocket.setSoTimeout(2000);
             Socket socket;
 
-            logger.log("Server initialized. Listening on port 60000");
+            log("Server listening on port 60000");
             while (!Thread.currentThread().isInterrupted()) {
                 try {
                     socket = serverSocket.accept();
-                    log("Connection established with " + socket.getInetAddress());
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    String json = reader.readLine();
-                    processGson(json);
-                    socket.close();
                 } catch (InterruptedIOException e) {
                     continue;
                 }
-
+                ConnectionReplier connectionReplier = new ConnectionReplier(this, socket);
+                executorService.execute(connectionReplier);
             }
         } catch (IOException e) {
             log("Fatal error.");
         }
-        //executorService.shutdown();
+        executorService.shutdown();
     }
 
     @Override
     public void log(String logMessage) {
         Platform.runLater(() -> logger.log(logMessage));
-    }
-
-    private void processGson(String json) {
-        Gson gson = new Gson();
-        Message message = gson.fromJson(json, Message.class);
-        log("Received message: " + message);
     }
 }

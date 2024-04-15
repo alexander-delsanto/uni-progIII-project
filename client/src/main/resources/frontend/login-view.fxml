@@ -23,7 +23,7 @@
         <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
         </padding>
-        <Button text="Login" onAction="#login"/>
-        <Button text="Register"/>
+        <Button fx:id="loginButton" text="Login" onAction="#login"/>
+        <Button fx:id="registerButton" text="Register" onAction="#register"/>
     </HBox>
 </VBox>

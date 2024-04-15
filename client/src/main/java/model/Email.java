@@ -1,17 +1,13 @@
 package model;
 
-import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
 import model.message.EmailMessage;
-
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
-public class Email {
+public class Email implements Serializable {
     private final SimpleStringProperty sender = new SimpleStringProperty("");
     private final SimpleStringProperty recipients = new SimpleStringProperty("");
     private final SimpleStringProperty subject = new SimpleStringProperty("");

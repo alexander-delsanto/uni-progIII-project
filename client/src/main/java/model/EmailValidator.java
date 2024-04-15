@@ -1,6 +1,17 @@
 package model;
 
 public class EmailValidator {
+
+    public boolean checkValidity(String recipients) {
+        if (recipients == null || recipients.isEmpty()) return false;
+        recipients = recipients.trim();
+        String[] splitRecipients = recipients.split(",");
+        for (String recipient : splitRecipients)
+            if (!isAddressValid(recipient))
+                return false;
+        return true;
+    }
+
     public boolean isAddressValid(String address) {
         if (address == null || address.isEmpty())
             return false;
