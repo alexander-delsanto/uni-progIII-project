@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import interfaces.Logger;
 import model.EmailMessage;
 import model.Message;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;

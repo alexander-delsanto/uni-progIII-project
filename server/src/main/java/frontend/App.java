@@ -35,7 +35,7 @@ public class App extends Application {
 
         executorService.execute(server);
         stage.setOnCloseRequest((event) -> {
-            executorService.shutdown();
+            executorService.shutdownNow();
         });
     }
 

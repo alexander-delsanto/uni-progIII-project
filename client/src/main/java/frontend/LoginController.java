@@ -60,6 +60,7 @@ public class LoginController implements EndStatusListener<Pair<Boolean, String>>
             isProcessing = false;
             updateUIForProcessing(false);
         }
+        executorService.shutdown();
     }
 
     private void updateUIForProcessing(boolean isProcessing) {

@@ -1,10 +1,7 @@
 package backend;
 
-import com.google.gson.Gson;
 import interfaces.Logger;
 import javafx.application.Platform;
-import model.Message;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -30,6 +27,7 @@ public class Server implements Runnable, Logger {
     @Override
     public void run() {
         try (ServerSocket serverSocket = new ServerSocket(60000)) {
+            serverSocket.setSoTimeout(1000);
             Socket socket;
 
             log("Server listening on port 60000");
@@ -44,8 +42,9 @@ public class Server implements Runnable, Logger {
             }
         } catch (IOException e) {
             log("Fatal error.");
+        } finally {
+            executorService.shutdown();
         }
-        executorService.shutdown();
     }
 
     @Override
