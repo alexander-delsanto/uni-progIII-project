@@ -45,7 +45,6 @@ public class MailBox {
 
     public void deleteSelectedEmail(String user, Email email) {
         if (email == null) return;
-        System.out.println(email.equals(selectedEmail));
         if (email.equals(selectedEmail)) setSelectedEmail(null);
         if (user.equals(email.getSender())) {
             outbox.remove(email);

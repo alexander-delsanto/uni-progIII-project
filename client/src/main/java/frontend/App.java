@@ -52,7 +52,6 @@ public class App extends Application {
         boolean online = emailMessages != null;
         MailBox.getInstance().setOnline(online);
         if (!online) return;
-        System.out.println(emailMessages);
         MailBox.getInstance().addEmails(UserData.getInstance().getUser(), emailMessages);
     }
 

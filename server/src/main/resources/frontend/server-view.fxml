@@ -5,11 +5,17 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="frontend.ServerViewController">
     <center>
-        <ListView fx:id="logList"/>
+        <ListView fx:id="logList">
+            <placeholder>
+                <Label text="No logs available."/>
+            </placeholder>
+        </ListView>
     </center>
+
     <bottom>
         <HBox alignment="TOP_RIGHT">
             <Button onAction="#clearLogs" text="Clear logs">

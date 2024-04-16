@@ -14,10 +14,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class App extends Application {
-    private int WIDTH = 800;
-    private int HEIGHT = 600;
+    private final int WIDTH = 800;
+    private final int HEIGHT = 600;
     private Stage stage;
-    private ExecutorService executorService = Executors.newFixedThreadPool(1);
+    private final ExecutorService executorService = Executors.newFixedThreadPool(1);
 
     @Override
     public void start(Stage stage) throws IOException {

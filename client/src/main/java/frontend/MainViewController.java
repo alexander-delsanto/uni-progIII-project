@@ -4,14 +4,12 @@ import model.Email;
 import model.MailBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import model.UserData;
 
 import java.util.Comparator;
 
 public class MainViewController {
     @FXML private ListView<Email> inboxListView;
     @FXML private ListView<Email> outboxListView;
-    private final UserData userData = UserData.getInstance();
     private final MailBox mailBox = MailBox.getInstance();
 
     @FXML

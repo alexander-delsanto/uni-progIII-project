@@ -33,9 +33,7 @@ public class EmailEditorController implements EndStatusNotifier<Email> {
     @FXML
     private void send() { endStatusListener.useEndStatus(email); }
     @FXML
-    private void cancel() {
-        // Close window
-    }
+    private void cancel() { endStatusListener.useEndStatus(null); }
 
     @Override
     public void setEndStatusListener(EndStatusListener<Email> listener) {

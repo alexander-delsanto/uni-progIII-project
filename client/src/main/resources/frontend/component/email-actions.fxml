@@ -5,21 +5,22 @@
 <?import javafx.scene.layout.*?>
 
 <HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="frontend.component.EmailActionsController" alignment="CENTER_RIGHT">
+      fx:controller="frontend.component.EmailActionsController" alignment="CENTER_RIGHT"
+      stylesheets="@../css/component/email-actions.css">
 
     <Button onAction="#openEmailEditor" text="New email" HBox.hgrow="ALWAYS">
         <HBox.margin><Insets topRightBottomLeft="10.0"/></HBox.margin>
     </Button>
-    <Button text="Reply" HBox.hgrow="ALWAYS">
+    <Button fx:id="replyButton" onAction="#openEmailEditor" text="Reply" HBox.hgrow="ALWAYS">
         <HBox.margin><Insets topRightBottomLeft="10.0"/></HBox.margin>
     </Button>
-    <Button text="Reply All" HBox.hgrow="ALWAYS">
+    <Button fx:id="replyAllButton" onAction="#openEmailEditor" text="Reply All" HBox.hgrow="ALWAYS">
         <HBox.margin><Insets topRightBottomLeft="10.0"/></HBox.margin>
     </Button>
-    <Button text="Forward" HBox.hgrow="ALWAYS">
+    <Button fx:id="forwardButton" onAction="#openEmailEditor" text="Forward" HBox.hgrow="ALWAYS">
         <HBox.margin><Insets topRightBottomLeft="10.0"/></HBox.margin>
     </Button>
-    <Button onAction="#deleteSelectedEmail" text="🗑" >
+    <Button fx:id="deleteButton" onAction="#deleteEmail" text="Delete email">
         <HBox.margin><Insets topRightBottomLeft="10.0"/></HBox.margin>
 
     </Button>

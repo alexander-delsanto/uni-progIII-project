@@ -48,6 +48,31 @@ public class Email implements Serializable {
         return new EmailMessage(getSender(), getRecipients(), getSubject(), getBody(), getId(), date);
     }
 
+    public String formatForReply() {
+        StringBuilder newBody = new StringBuilder("\n");
+        newBody.append("On ").append(getTimestamp()).append(", ").append(getSender()).append(" wrote:\n");
+        for (String line : getBody().split("\n")) {
+            newBody.append("> ").append(line).append("\n");
+        }
+        return newBody.toString();
+    }
+
+    public String getReplyAllRecipients(String sender) {
+        String[] recipients = getRecipients().split(",");
+        StringBuilder replyAllRecipients = new StringBuilder();
+        replyAllRecipients.append(getSender()).append(", ");
+        for (int i = 0; i < recipients.length; i++) {
+            String recipient = recipients[i].trim();
+            if (!recipient.equals(sender)) {
+                replyAllRecipients.append(recipient);
+                if (i < recipients.length - 2) {
+                    replyAllRecipients.append(", ");
+                }
+            }
+        }
+        return replyAllRecipients.toString();
+    }
+
     @Override
     public String toString() {
         return subject.get();
