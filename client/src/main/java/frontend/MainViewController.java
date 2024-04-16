@@ -1,6 +1,7 @@
 package frontend;
 
 import backend.ServiceRequester;
+import model.MailBox;
 import model.message.EmailMessage;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -10,13 +11,16 @@ public class MainViewController {
     @FXML private ListView<EmailMessage> inboxListView;
     @FXML private ListView<EmailMessage> outboxListView;
     private final UserData userData = UserData.getInstance();
-    private int i = 0;
 
+    @FXML
+    private void initialize() {
+        inboxListView.setItems(MailBox.getInstance().inboxObservableList());
+        outboxListView.setItems(MailBox.getInstance().outboxObservableList());
+    }
 
     @FXML
     public void handleButtonClick() {
-        /*ServiceRequester serviceRequester = new ServiceRequester();
-        serviceRequester.run();*/
+
     }
 
     @FXML

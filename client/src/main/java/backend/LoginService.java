@@ -16,7 +16,9 @@ public class LoginService extends ServiceRequester<Pair<Boolean, String>> {
         Message message = new Message(user, Message.OP_LOGIN, "",null);
         Message response = sendMessage(message);
         Pair<Boolean, String> res;
-        if (response.errorMessage() == null)
+        if (response == null)
+            res = new Pair<>(false, "Cannot communicate with server.");
+        else if (response.errorMessage() == null)
             res = new Pair<>(true, null);
         else
             res = new Pair<>(false, "User does not exist.");

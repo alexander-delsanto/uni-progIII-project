@@ -1,16 +1,22 @@
 package frontend;
 
+import backend.Updater;
 import frontend.util.StageWrapper;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.Email;
 import model.MailBox;
 import model.UserData;
+import model.message.EmailMessage;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class App extends Application {
+    private final int UPDATE_INTERVAL = 5;
     private static final int WIDTH = 550;
     private static final int HEIGHT = 400;
 
@@ -40,9 +46,18 @@ public class App extends Application {
         MailBox.getInstance().setUser(user);
         stageWrapper.setWidth(1600);
         stageWrapper.setHeight(900);
+
+        Updater updater = new Updater();
+        updater.setEndStatusListener(this::addNewEmails);
+        executorService.scheduleAtFixedRate(updater, 0, UPDATE_INTERVAL, TimeUnit.SECONDS);
     }
 
-    public void setParameters() {
+    private void addNewEmails(List<EmailMessage> emailMessages) {
+        System.out.println(emailMessages);
+        MailBox.getInstance().addEmails(emailMessages);
+    }
+
+    private void setParameters() {
         stageWrapper.setIcon(getClass().getResource("assets/icon.png"));
         stageWrapper.setOnCloseRequest(e -> executorService.shutdownNow());
     }

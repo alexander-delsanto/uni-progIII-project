@@ -23,6 +23,8 @@ public class MailBox {
 
     public String getUser() { return user; }
     public void setUser(String user) { this.user = user; }
+    public ObservableList<EmailMessage> inboxObservableList() { return inbox; }
+    public ObservableList<EmailMessage> outboxObservableList() { return outbox; }
 
     public void addEmails(List<EmailMessage> emailMessages) {
         if (emailMessages == null || emailMessages.isEmpty()) return;

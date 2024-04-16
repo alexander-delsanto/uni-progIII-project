@@ -24,7 +24,8 @@ public abstract class ServiceRequester<T> implements Runnable, EndStatusNotifier
     @Override
     public void run() {
         T result = callService();
-        Platform.runLater(() -> listener.useEndStatus(result));
+        if (listener != null)
+            Platform.runLater(() -> listener.useEndStatus(result));
     }
 
     public Message sendMessage(Message message) {
