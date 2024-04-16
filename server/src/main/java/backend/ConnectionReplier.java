@@ -48,9 +48,8 @@ public class ConnectionReplier implements Runnable {
         return switch (message.operation()) {
             case Message.OP_REGISTER -> handleRegistration(message);
             case Message.OP_LOGIN -> handleLogin(message);
-            case Message.OP_GET_ALL -> handleGetEmails(message);
             case Message.OP_SEND -> handleSendEmail(message);
-            default -> new Message(message.user(), message.operation(), "Unsupported operation", null);
+            default -> handleGetEmails(message);
         };
     }
 
@@ -93,8 +92,8 @@ public class ConnectionReplier implements Runnable {
         List<EmailMessage> emailMessages = userFile.getEmails();
 
         int id = userFile.getNextId(emailMessages);
-        List<EmailMessage> result = emailMessages.stream().filter((mail) -> mail.id() >= message.operation()).toList();
-        return new Message(message.user(), message.operation(), null, result);
+        final List<EmailMessage> result = emailMessages.stream().filter((mail) -> mail.id() >= message.operation()).toList();
+        return new Message(message.user(), id, null, result);
     }
 
     private Message handleSendEmail(Message message) {
@@ -102,7 +101,7 @@ public class ConnectionReplier implements Runnable {
             logger.log("Send email failed: No emails provided.");
             throw new IllegalArgumentException("No emails provided in the message.");
         }
-        EmailMessage toSend = message.emailMessages().get(0);
+        EmailMessage toSend = message.emailMessages().getFirst();
         if (toSend.recipients() == null || toSend.sender() == null) {
             logger.log("Send email failed: Sender or recipients are null.");
             throw new IllegalArgumentException("Sender or recipients are null.");

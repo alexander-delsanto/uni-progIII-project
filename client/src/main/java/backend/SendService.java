@@ -7,12 +7,12 @@ import model.message.Message;
 import java.util.Collections;
 import java.util.List;
 
-public class Sender extends ServiceRequester<String> {
+public class SendService extends ServiceRequester<String> {
     private final String user;
     private final Email email;
     private final EmailValidator emailValidator = new EmailValidator();
 
-    public Sender(String user, Email message) {
+    public SendService(String user, Email message) {
         this.user = user;
         this.email = message;
     }

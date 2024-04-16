@@ -9,7 +9,7 @@
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="frontend.LoginController"
       alignment="CENTER" stylesheets="@css/login-view.css">
     <Label styleClass="title" text="Welcome!"/>
-    <Label styleClass="subtitle" text="Please login with your existing emailMessage or create a new one.">
+    <Label styleClass="subtitle" text="Please login with your existing email or create a new one.">
         <VBox.margin><Insets top="10" bottom="10" right="50" left="50" /></VBox.margin>
     </Label>
 

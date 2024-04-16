@@ -1,16 +1,14 @@
 package frontend;
 
-import backend.Updater;
+import backend.UpdateService;
 import frontend.util.StageWrapper;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.Email;
 import model.MailBox;
 import model.UserData;
 import model.message.EmailMessage;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -42,19 +40,17 @@ public class App extends Application {
     public void loadMainScene(String user) {
         stageWrapper.setRootAndGetController(getClass().getResource("main-view.fxml"));
         stageWrapper.setTitle("Email client");
-        UserData.getInstance().setUser(user);
-        MailBox.getInstance().setUser(user);
         stageWrapper.setWidth(1600);
         stageWrapper.setHeight(900);
 
-        Updater updater = new Updater();
-        updater.setEndStatusListener(this::addNewEmails);
-        executorService.scheduleAtFixedRate(updater, 0, UPDATE_INTERVAL, TimeUnit.SECONDS);
+        UpdateService updateService = new UpdateService(UserData.getInstance().getUser());
+        updateService.setEndStatusListener(this::addNewEmails);
+        executorService.scheduleAtFixedRate(updateService, 0, UPDATE_INTERVAL, TimeUnit.SECONDS);
     }
 
     private void addNewEmails(List<EmailMessage> emailMessages) {
         System.out.println(emailMessages);
-        MailBox.getInstance().addEmails(emailMessages);
+        MailBox.getInstance().addEmails(UserData.getInstance().getUser(), emailMessages);
     }
 
     private void setParameters() {

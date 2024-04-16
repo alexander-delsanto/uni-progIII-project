@@ -8,16 +8,24 @@
         <SplitPane dividerPositions="0.4">
             <TabPane tabClosingPolicy="UNAVAILABLE" minWidth="200">
                 <Tab onSelectionChanged="#changeTab" text="Inbox">
-                    <ListView fx:id="inboxListView" onMouseClicked="#updateSelectedInbox"/>
+                    <ListView fx:id="inboxListView" onMouseClicked="#updateSelectedInbox">
+                        <placeholder>
+                            <Label text="No emails in inbox."/>
+                        </placeholder>
+                    </ListView>
                 </Tab>
                 <Tab onSelectionChanged="#changeTab" text="Outbox">
-                    <ListView fx:id="outboxListView" onMouseClicked="#updateSelectedOutbox"/>
+                    <ListView fx:id="outboxListView" onMouseClicked="#updateSelectedOutbox">
+                        <placeholder>
+                            <Label text="No emails in outbox."/>
+                        </placeholder>
+                    </ListView>
                 </Tab>
             </TabPane>
 
             <BorderPane minWidth="300">
                 <center>
-                    <Button text="Click me!" onAction="#handleButtonClick"/>
+                    <fx:include fx:id="mailViewer" source="component/email-view.fxml"/>
                 </center>
                 <bottom>
                     <fx:include fx:id="mailEditor" source="component/email-actions.fxml"/>

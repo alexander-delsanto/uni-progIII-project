@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.util.Pair;
 import model.EmailValidator;
+import model.UserData;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -70,6 +71,7 @@ public class LoginController implements EndStatusListener<Pair<Boolean, String>>
     @Override
     public void useEndStatus(Pair<Boolean, String> result) {
         if (result.getKey()) {
+            UserData.getInstance().setUser(emailAddress);
             listener.useEndStatus(emailAddress);
         } else {
             errorLabel.setText(result.getValue());

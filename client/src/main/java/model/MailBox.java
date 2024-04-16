@@ -1,13 +1,20 @@
 package model;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import model.message.EmailMessage;
 
 import java.util.List;
 
 public class MailBox {
-    private String user;
+    private final Email selectedEmail = new Email("", "", "", "");
+    private final SimpleBooleanProperty selectionExists = new SimpleBooleanProperty(false);
+    private final SimpleBooleanProperty online = new SimpleBooleanProperty(false);
+
+    private final ObservableList<Email> inbox = FXCollections.observableArrayList();
+    private final ObservableList<Email> outbox = FXCollections.observableArrayList();
 
     private static MailBox instance = null;
     public static synchronized MailBox getInstance(){
@@ -16,38 +23,53 @@ public class MailBox {
         }
         return instance;
     }
-    private MailBox(){}
-    
-    private final ObservableList<EmailMessage> inbox = FXCollections.observableArrayList();
-    private final ObservableList<EmailMessage> outbox = FXCollections.observableArrayList();
+    private MailBox() { }
 
-    public String getUser() { return user; }
-    public void setUser(String user) { this.user = user; }
-    public ObservableList<EmailMessage> inboxObservableList() { return inbox; }
-    public ObservableList<EmailMessage> outboxObservableList() { return outbox; }
+    public ObservableList<Email> inboxObservableList() { return inbox; }
+    public ObservableList<Email> outboxObservableList() { return outbox; }
 
-    public void addEmails(List<EmailMessage> emailMessages) {
+    public void addEmails(String user, List<EmailMessage> emailMessages) {
         if (emailMessages == null || emailMessages.isEmpty()) return;
         for (EmailMessage emailMessage : emailMessages) {
-            addEmail(emailMessage);
+            addEmail(user, emailMessage);
         }
     }
 
-    public void addEmail(EmailMessage emailMessage) {
+    public void addEmail(String user, EmailMessage emailMessage) {
         if (emailMessage.sender().equals(user)) {
-            outbox.add(emailMessage);
+            outbox.add(new Email(emailMessage));
         } else {
-            inbox.add(emailMessage);
+            inbox.add(new Email(emailMessage));
         }
     }
 
-    public void deleteEmail(EmailMessage emailMessage) {
+    public void deleteEmail(String user, EmailMessage emailMessage) {
         if (emailMessage.sender().equals(user)) {
-            outbox.remove(emailMessage);
+            outbox.remove(new Email(emailMessage));
         } else {
-            inbox.remove(emailMessage);
+            inbox.remove(new Email(emailMessage));
         }
     }
 
+    public Email getSelectedEmail() {
+        return selectedEmail;
+    }
 
+    @FXML
+    public void setSelectedEmail(Email email) {
+        if (email == null) {
+            email = new Email("", "", "", "");
+            selectionExists.set(false);
+        } else {
+            selectionExists.set(true);
+        }
+        selectedEmail.senderProperty().bind(email.senderProperty());
+        selectedEmail.recipientsProperty().bind(email.recipientsProperty());
+        selectedEmail.subjectProperty().bind(email.subjectProperty());
+        selectedEmail.bodyProperty().bind(email.bodyProperty());
+        selectedEmail.timestampProperty().bind(email.timestampProperty());
+        selectedEmail.setId(email.getId());
+    }
+
+    public SimpleBooleanProperty selectionExistsProperty() { return selectionExists; }
 }

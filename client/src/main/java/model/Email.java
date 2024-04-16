@@ -15,11 +15,20 @@ public class Email implements Serializable {
     private final SimpleStringProperty timestamp = new SimpleStringProperty("");
     private int id;
 
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy 'at' HH:mm");
+
     public Email(String sender, String recipients, String subject, String body) {
         this.sender.set(sender == null ? "" : sender);
         this.recipients.set(recipients == null ? "" : recipients);
         this.subject.set(subject == null ? "" : subject);
         this.body.set(body == null ? "" : body);
+    }
+
+    public Email(EmailMessage emailMessage) {
+        this(emailMessage.sender(), emailMessage.recipients(), emailMessage.subject(), emailMessage.body());
+        this.id = emailMessage.id();
+        if (emailMessage.sentTime() != null)
+            this.timestamp.set(dateFormat.format(emailMessage.sentTime()));
     }
 
     public Email(Email email) {
@@ -34,9 +43,14 @@ public class Email implements Serializable {
     public EmailMessage toEmailMessage() {
         Date date = null;
         try {
-            date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(getTimestamp());
+            date = dateFormat.parse(getTimestamp());
         } catch (ParseException e) { /* do noting */ }
         return new EmailMessage(getSender(), getRecipients(), getSubject(), getBody(), getId(), date);
+    }
+
+    @Override
+    public String toString() {
+        return subject.get();
     }
 
     public SimpleStringProperty senderProperty() { return sender; }

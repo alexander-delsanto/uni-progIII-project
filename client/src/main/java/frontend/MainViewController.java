@@ -1,41 +1,38 @@
 package frontend;
 
-import backend.ServiceRequester;
+import model.Email;
 import model.MailBox;
-import model.message.EmailMessage;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import model.UserData;
 
+import java.util.Comparator;
+
 public class MainViewController {
-    @FXML private ListView<EmailMessage> inboxListView;
-    @FXML private ListView<EmailMessage> outboxListView;
+    @FXML private ListView<Email> inboxListView;
+    @FXML private ListView<Email> outboxListView;
     private final UserData userData = UserData.getInstance();
+    private final MailBox mailBox = MailBox.getInstance();
 
     @FXML
     private void initialize() {
-        inboxListView.setItems(MailBox.getInstance().inboxObservableList());
-        outboxListView.setItems(MailBox.getInstance().outboxObservableList());
-    }
-
-    @FXML
-    public void handleButtonClick() {
-
+        inboxListView.setItems(mailBox.inboxObservableList().sorted(Comparator.comparing(Email::getTimestamp).reversed()));
+        outboxListView.setItems(mailBox.outboxObservableList().sorted(Comparator.comparing(Email::getTimestamp).reversed()));
     }
 
     @FXML
     public void changeTab() {
+        if (inboxListView == null || outboxListView == null) return;
 
+        inboxListView.getSelectionModel().clearSelection();
+        outboxListView.getSelectionModel().clearSelection();
+        mailBox.setSelectedEmail(null);
     }
 
     @FXML
-    public void updateSelectedInbox() {
-
-    }
+    public void updateSelectedInbox() { mailBox.setSelectedEmail(inboxListView.getSelectionModel().getSelectedItem()); }
 
     @FXML
-    public void updateSelectedOutbox() {
-
-    }
+    public void updateSelectedOutbox() { mailBox.setSelectedEmail(outboxListView.getSelectionModel().getSelectedItem()); }
 
 }

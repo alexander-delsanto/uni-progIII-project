@@ -18,16 +18,18 @@ public class UserData {
     private UserData(){}
 
 
-    private final StringProperty name = new SimpleStringProperty("");
+    private final StringProperty user = new SimpleStringProperty("");
     private final StringProperty status = new SimpleStringProperty("");
 
     public StringProperty userProperty() {
-        return name;
+        return user;
     }
+
+    public String getUser() { return user.get(); }
 
     public StringProperty statusProperty() { return status; }
 
-    public void setUser(String user) { this.name.set(user); }
+    public void setUser(String user) { this.user.set(user); }
 
     public void setStatus(String status) { this.status.set(status); }
 }

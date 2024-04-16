@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="frontend.component.EmailViewController" fx:id="emailView"
+      VBox.vgrow="ALWAYS" stylesheets="@../css/component/email-view.css">
+    <HBox>
+        <Label text="From:"/>
+        <TextField fx:id="fromField" editable="false" HBox.hgrow="ALWAYS"/>
+    </HBox>
+    <HBox>
+        <Label text="To:"/>
+        <TextField fx:id="toField" editable="false" HBox.hgrow="ALWAYS"/>
+    </HBox>
+    <HBox>
+        <Label text="Subject:"/>
+        <TextField fx:id="subjectField" editable="false" HBox.hgrow="ALWAYS"/>
+    </HBox>
+    <HBox>
+        <Label text="Date:"/>
+        <TextField fx:id="dateField" editable="false" HBox.hgrow="ALWAYS"/>
+    </HBox>
+    <HBox VBox.vgrow="ALWAYS">
+        <Label text="Content:"/>
+        <TextArea fx:id="contentField" editable="false" VBox.vgrow="ALWAYS"/>
+    </HBox>
+
+</VBox>
