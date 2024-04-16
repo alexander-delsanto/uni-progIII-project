@@ -4,19 +4,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.component.StatusBarController">
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="frontend.component.StatusBarController" stylesheets="@../css/component/status-bar.css">
     <padding>
         <Insets top="5" right="5" bottom="5" left="5"/>
     </padding>
     <left>
-        <HBox spacing="5">
+        <HBox spacing="5" id="userInfoHBox">
             <Label text="Logged in as:"/>
             <Label fx:id="userLabel"/>
         </HBox>
     </left>
     <right>
-        <HBox spacing="5">
-            <Label text="Status:"/>
+        <HBox spacing="5" id="statusInfoHBox">
             <Label fx:id="statusLabel"/>
         </HBox>
     </right>

@@ -77,4 +77,19 @@ public class FileManager {
             throw new IllegalStateException("Failed to write emails to file: " + file.getPath(), e);
         }
     }
+
+    public void deleteEmails(List<EmailMessage> emails) {
+        rwLock.writeLock().lock();
+        try {
+            List<EmailMessage> userEmails = loadEmails();
+            System.out.println("Deleting emails: " + userEmails);
+            boolean removed = userEmails.removeAll(emails);
+            if (!removed) {
+                throw new IllegalArgumentException("Emails to delete not found in file.");
+            }
+            saveEmails(userEmails);
+        } finally {
+            rwLock.writeLock().unlock();
+        }
+    }
 }

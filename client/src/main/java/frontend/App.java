@@ -49,6 +49,9 @@ public class App extends Application {
     }
 
     private void addNewEmails(List<EmailMessage> emailMessages) {
+        boolean online = emailMessages != null;
+        MailBox.getInstance().setOnline(online);
+        if (!online) return;
         System.out.println(emailMessages);
         MailBox.getInstance().addEmails(UserData.getInstance().getUser(), emailMessages);
     }
@@ -56,6 +59,7 @@ public class App extends Application {
     private void setParameters() {
         stageWrapper.setIcon(getClass().getResource("assets/icon.png"));
         stageWrapper.setOnCloseRequest(e -> executorService.shutdownNow());
+
     }
 
     public static void main(String[] args) {

@@ -43,11 +43,14 @@ public class MailBox {
         }
     }
 
-    public void deleteEmail(String user, EmailMessage emailMessage) {
-        if (emailMessage.sender().equals(user)) {
-            outbox.remove(new Email(emailMessage));
+    public void deleteSelectedEmail(String user, Email email) {
+        if (email == null) return;
+        System.out.println(email.equals(selectedEmail));
+        if (email.equals(selectedEmail)) setSelectedEmail(null);
+        if (user.equals(email.getSender())) {
+            outbox.remove(email);
         } else {
-            inbox.remove(new Email(emailMessage));
+            inbox.remove(email);
         }
     }
 
@@ -71,5 +74,9 @@ public class MailBox {
         selectedEmail.setId(email.getId());
     }
 
+
     public SimpleBooleanProperty selectionExistsProperty() { return selectionExists; }
+
+    public SimpleBooleanProperty onlineProperty() { return online; }
+    public void setOnline(boolean online) { this.online.set(online); }
 }

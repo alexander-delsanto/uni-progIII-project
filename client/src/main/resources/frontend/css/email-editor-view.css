@@ -1,0 +1,22 @@
+HBox{
+    -fx-padding: 10px 10px 0 10px;
+}
+
+VBox{
+    -fx-padding: 10px 10px 10px 10px;
+}
+
+Label{
+    -fx-min-width: 50px;
+}
+
+TextField {
+    -fx-border-width: 0;
+    -fx-padding: 2px 5px;
+}
+
+#errorLabel {
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+    -fx-padding: 0 10px 0 10px;
+}

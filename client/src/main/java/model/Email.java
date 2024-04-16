@@ -15,7 +15,7 @@ public class Email implements Serializable {
     private final SimpleStringProperty timestamp = new SimpleStringProperty("");
     private int id;
 
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy 'at' HH:mm");
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy 'at' HH:mm:ss");
 
     public Email(String sender, String recipients, String subject, String body) {
         this.sender.set(sender == null ? "" : sender);
@@ -51,6 +51,17 @@ public class Email implements Serializable {
     @Override
     public String toString() {
         return subject.get();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || this.getClass() != obj.getClass()) return false;
+        Email email = (Email) obj;
+        return this.getSender().equals(email.getSender()) &&
+                this.getRecipients().equals(email.getRecipients()) &&
+                this.getSubject().equals(email.getSubject()) &&
+                this.getBody().equals(email.getBody()) &&
+                this.getTimestamp().equals(email.getTimestamp());
     }
 
     public SimpleStringProperty senderProperty() { return sender; }

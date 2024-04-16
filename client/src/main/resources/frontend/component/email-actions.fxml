@@ -19,7 +19,8 @@
     <Button text="Forward" HBox.hgrow="ALWAYS">
         <HBox.margin><Insets topRightBottomLeft="10.0"/></HBox.margin>
     </Button>
-    <Button text="🗑" >
+    <Button onAction="#deleteSelectedEmail" text="🗑" >
         <HBox.margin><Insets topRightBottomLeft="10.0"/></HBox.margin>
+
     </Button>
 </HBox>

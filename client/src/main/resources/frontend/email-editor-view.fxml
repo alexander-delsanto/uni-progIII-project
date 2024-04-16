@@ -6,21 +6,22 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="frontend.EmailEditorController">
+            fx:controller="frontend.EmailEditorController"
+            stylesheets="@css/email-editor-view.css">
 
     <top>
         <VBox>
             <HBox>
                 <Label text="From: "/>
-                <TextField fx:id="fromField" prefWidth="200" editable="false"/>
+                <TextField fx:id="fromField" editable="false" HBox.hgrow="ALWAYS"/>
             </HBox>
             <HBox>
                 <Label text="To: "/>
-                <TextField fx:id="toField" prefWidth="200"/>
+                <TextField fx:id="toField" HBox.hgrow="ALWAYS"/>
             </HBox>
             <HBox>
                 <Label text="Subject: "/>
-                <TextField fx:id="subjectField" prefWidth="200"/>
+                <TextField fx:id="subjectField" HBox.hgrow="ALWAYS"/>
             </HBox>
         </VBox>
     </top>
@@ -28,15 +29,15 @@
         <VBox>
             <Label text="Content: "/>
             <HBox>
-                <TextField fx:id="bodyField" prefWidth="200"/>
+                <TextArea fx:id="bodyField" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"/>
             </HBox>
         </VBox>
     </center>
     <bottom>
-        <HBox>
-            <Label fx:id="errorLabel"/>
-            <Button text="Cancel" onAction="#cancel"/>
-            <Button text="Send" onAction="#send"/>
+        <HBox alignment="CENTER_RIGHT">
+            <Label fx:id="errorLabel" HBox.hgrow="ALWAYS"/>
+            <Button text="Cancel" onAction="#cancel" alignment="CENTER_RIGHT"/>
+            <Button text="Send" onAction="#send" alignment="CENTER_RIGHT"/>
         </HBox>
     </bottom>
 

@@ -10,7 +10,6 @@ public class UserData {
         if(instance == null){
             instance = new UserData();
             instance.setUser("");
-            instance.setStatus("");
         }
 
         return instance;
@@ -19,7 +18,6 @@ public class UserData {
 
 
     private final StringProperty user = new SimpleStringProperty("");
-    private final StringProperty status = new SimpleStringProperty("");
 
     public StringProperty userProperty() {
         return user;
@@ -27,9 +25,5 @@ public class UserData {
 
     public String getUser() { return user.get(); }
 
-    public StringProperty statusProperty() { return status; }
-
     public void setUser(String user) { this.user.set(user); }
-
-    public void setStatus(String status) { this.status.set(status); }
 }

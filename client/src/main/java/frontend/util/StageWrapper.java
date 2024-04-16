@@ -32,7 +32,7 @@ public class StageWrapper {
 
     public void setIcon (URL iconPath) {
         if (iconPath != null)
-            this.stage.getIcons().add(new Image(iconPath.toExternalForm()));
+            stage.getIcons().add(new Image(iconPath.toExternalForm()));
         else
             System.err.println("Icon path is invalid");
     }
@@ -66,12 +66,12 @@ public class StageWrapper {
             return;
         }
 
-        this.stage.initOwner(window);
-        this.stage.initModality(javafx.stage.Modality.WINDOW_MODAL);
+        stage.initOwner(window);
+        stage.initModality(javafx.stage.Modality.WINDOW_MODAL);
     }
 
     public void setOnCloseRequest(EventHandler<WindowEvent> handler) {
-        this.stage.setOnCloseRequest(handler);
+        stage.setOnCloseRequest(handler);
     }
 
     public void setWidth(int width) { this.stage.setWidth(width); }

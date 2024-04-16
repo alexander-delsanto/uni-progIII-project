@@ -73,6 +73,7 @@ public class LoginController implements EndStatusListener<Pair<Boolean, String>>
         if (result.getKey()) {
             UserData.getInstance().setUser(emailAddress);
             listener.useEndStatus(emailAddress);
+            executorService.shutdownNow();
         } else {
             errorLabel.setText(result.getValue());
         }

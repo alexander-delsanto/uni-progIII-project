@@ -4,7 +4,7 @@ HBox{
 }
 
 .hbox-textarea{
-    -fx-padding: 100px;
+    -fx-padding: 10px;
 }
 
 Label{
@@ -18,4 +18,9 @@ TextField {
 
 TextArea {
     -fx-pref-width: 100000px; /* Bug of javafx (should be Infinity)*/
+}
+
+.error{
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
 }

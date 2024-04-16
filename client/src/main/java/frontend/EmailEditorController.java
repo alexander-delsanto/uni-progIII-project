@@ -4,6 +4,7 @@ import interfaces.EndStatusListener;
 import interfaces.EndStatusNotifier;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import model.Email;
 
@@ -12,7 +13,7 @@ public class EmailEditorController implements EndStatusNotifier<Email> {
     @FXML private TextField fromField;
     @FXML private TextField toField;
     @FXML private TextField subjectField;
-    @FXML private TextField bodyField;
+    @FXML private TextArea bodyField;
 
     private Email email;
     private EndStatusListener<Email> endStatusListener;
@@ -26,6 +27,7 @@ public class EmailEditorController implements EndStatusNotifier<Email> {
     }
 
     public void setErrorLabel(String error) {
+        errorLabel.setVisible(true);
         errorLabel.setText(error);
     }
     @FXML

@@ -1,6 +1,7 @@
 package frontend;
 
 import interfaces.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,7 +23,10 @@ public class ServerViewController implements Logger {
 
     @Override
     public synchronized void log(String logMessage) {
-        logs.add(logMessage);
+        Platform.runLater(() -> {
+            logs.add(logMessage);
+            logList.scrollTo(logs.size() - 1); // Scroll to the last item
+        });
     }
 
 }

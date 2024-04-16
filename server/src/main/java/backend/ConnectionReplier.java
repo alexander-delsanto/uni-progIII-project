@@ -49,6 +49,7 @@ public class ConnectionReplier implements Runnable {
             case Message.OP_REGISTER -> handleRegistration(message);
             case Message.OP_LOGIN -> handleLogin(message);
             case Message.OP_SEND -> handleSendEmail(message);
+            case Message.OP_DELETE -> handleDeleteEmail(message);
             default -> handleGetEmails(message);
         };
     }
@@ -128,5 +129,13 @@ public class ConnectionReplier implements Runnable {
         }
         logger.log("Email sent successfully from " + message.user());
         return new Message(message.user(), Message.OP_SEND, null, null);
+    }
+
+    public Message handleDeleteEmail(Message message) {
+        logger.log("Deleting " + message.emailMessages().size() +  " emails for " + message.user());
+        FileManager userFile = FileManager.get(message.user());
+        System.out.println("Got file manager for " + message.user() + "\n" + message.emailMessages());
+        userFile.deleteEmails(message.emailMessages());
+        return new Message(message.user(), message.operation(), null, null);
     }
 }
