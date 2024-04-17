@@ -39,7 +39,7 @@ public abstract class ServiceRequester<T> implements Runnable, EndStatusNotifier
                 System.err.println("Error during communication with server: " + e.getMessage());
             }
         } catch (IOException ignored) {
-
+            // Server is not running
         } catch (Throwable t) {
             System.err.println("Error with data manipulation: " + t.getMessage());
         }
