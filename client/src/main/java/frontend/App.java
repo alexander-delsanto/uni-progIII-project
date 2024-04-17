@@ -5,7 +5,6 @@ import frontend.util.StageWrapper;
 import javafx.application.Application;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import model.MailBox;
 import model.UserData;
 import model.message.EmailMessage;
@@ -48,9 +47,11 @@ public class App extends Application {
         stageWrapper.setTitle("Email client");
         stageWrapper.setWidth(1600);
         stageWrapper.setHeight(900);
+        stageWrapper.setMinWidth(1000);
+        stageWrapper.setMinHeight(600);
 
         initializeAlert();
-        UpdateService updateService = new UpdateService(UserData.getInstance().getUser());
+        UpdateService updateService = new UpdateService(userData.getUser());
         updateService.setEndStatusListener(this::addNewEmails);
         int UPDATE_INTERVAL = 5;
         executorService.scheduleAtFixedRate(updateService, 0, UPDATE_INTERVAL, TimeUnit.SECONDS);

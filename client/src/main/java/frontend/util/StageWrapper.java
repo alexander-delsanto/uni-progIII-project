@@ -76,6 +76,8 @@ public class StageWrapper {
 
     public void setWidth(int width) { this.stage.setWidth(width); }
     public void setHeight(int height) { this.stage.setHeight(height); }
+    public void setMinWidth(int minWidth) { this.stage.setMinWidth(minWidth); }
+    public void setMinHeight(int minHeight) { this.stage.setMinHeight(minHeight); }
 
     public Stage getStage() { return stage; }
 }

@@ -13,7 +13,7 @@
         <VBox.margin><Insets top="10" bottom="10" right="50" left="50" /></VBox.margin>
     </Label>
 
-    <TextField fx:id="usernameField" onAction="#login" text="alex@mail.com">
+    <TextField fx:id="usernameField" text="alex@mail.com">
         <VBox.margin><Insets top="20" right="20" left="20" bottom="5" /></VBox.margin>
     </TextField>
     <Label styleClass="error" fx:id="errorLabel">
@@ -23,7 +23,7 @@
         <padding>
             <Insets top="10" right="10" bottom="10" left="10"/>
         </padding>
-        <Button fx:id="loginButton" text="Login" onAction="#login"/>
-        <Button fx:id="registerButton" text="Register" onAction="#register"/>
+        <Button fx:id="loginButton" text="Login" onAction="#requestAuth"/>
+        <Button fx:id="registerButton" text="Register" onAction="#requestAuth"/>
     </HBox>
 </VBox>
