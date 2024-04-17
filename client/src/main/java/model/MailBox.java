@@ -36,20 +36,24 @@ public class MailBox {
     }
 
     public void addEmail(String user, EmailMessage emailMessage) {
-        if (emailMessage.sender().equals(user)) {
-            outbox.add(new Email(emailMessage));
-        } else {
-            inbox.add(new Email(emailMessage));
+        synchronized (this) {
+            if (emailMessage.sender().equals(user)) {
+                outbox.add(new Email(emailMessage));
+            } else {
+                inbox.add(new Email(emailMessage));
+            }
         }
     }
 
     public void deleteSelectedEmail(String user, Email email) {
-        if (email == null) return;
-        if (email.equals(selectedEmail)) setSelectedEmail(null);
-        if (user.equals(email.getSender())) {
-            outbox.remove(email);
-        } else {
-            inbox.remove(email);
+        synchronized (this) {
+            if (email == null) return;
+            if (email.equals(selectedEmail)) setSelectedEmail(null);
+            if (user.equals(email.getSender())) {
+                outbox.remove(email);
+            } else {
+                inbox.remove(email);
+            }
         }
     }
 
