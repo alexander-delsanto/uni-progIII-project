@@ -46,7 +46,7 @@ public class LoginController implements EndStatusListener<Pair<Boolean, String>>
             return;
         }
 
-        if (!emailValidator.isAddressValid(emailAddress)) {
+        if (emailValidator.isAddressInvalid(emailAddress)) {
             errorLabel.setText("Invalid email address");
             return;
         }
