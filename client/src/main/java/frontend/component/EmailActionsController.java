@@ -85,7 +85,7 @@ public class EmailActionsController {
             }
             stage.close();
         });
-        serviceRequester.run();
+        new Thread(serviceRequester).start();
     }
 
     @FXML
