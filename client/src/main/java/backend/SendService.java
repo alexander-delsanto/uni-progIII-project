@@ -29,6 +29,6 @@ public class SendService extends ServiceRequester<String> {
         if (response == null) {
             return "Couldn't reach server";
         }
-        return null;
+        return response.errorMessage();
     }
 }

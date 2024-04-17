@@ -13,7 +13,7 @@
         <VBox.margin><Insets top="10" bottom="10" right="50" left="50" /></VBox.margin>
     </Label>
 
-    <TextField fx:id="usernameField" text="alex@mail.com">
+    <TextField fx:id="usernameField" text="alex@mail.com" maxWidth="300">
         <VBox.margin><Insets top="20" right="20" left="20" bottom="5" /></VBox.margin>
     </TextField>
     <Label styleClass="error" fx:id="errorLabel">

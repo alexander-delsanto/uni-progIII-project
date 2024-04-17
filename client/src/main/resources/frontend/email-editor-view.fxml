@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
 
 <BorderPane xmlns="http://javafx.com/javafx"
@@ -12,32 +13,47 @@
     <top>
         <VBox>
             <HBox>
-                <Label text="From: "/>
+                <Label text="From: " minWidth="50"/>
                 <TextField fx:id="fromField" editable="false" HBox.hgrow="ALWAYS"/>
             </HBox>
             <HBox>
-                <Label text="To: "/>
+                <Label text="To: " minWidth="50"/>
                 <TextField fx:id="toField" HBox.hgrow="ALWAYS"/>
             </HBox>
             <HBox>
-                <Label text="Subject: "/>
+                <Label text="Subject: " minWidth="50"/>
                 <TextField fx:id="subjectField" HBox.hgrow="ALWAYS"/>
             </HBox>
         </VBox>
     </top>
     <center>
-        <VBox>
-            <Label text="Content: "/>
-            <HBox>
-                <TextArea fx:id="bodyField" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"/>
-            </HBox>
-        </VBox>
+        <GridPane>
+            <padding>
+                <Insets  right="20" bottom="20" left="20"/>
+            </padding>
+            <GridPane.margin>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </GridPane.margin>
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10" prefWidth="100"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="NEVER" minHeight="10" prefHeight="30"/>
+                <RowConstraints vgrow="ALWAYS" minHeight="10" prefHeight="200"/>
+            </rowConstraints>
+            <Label text="Content:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextArea fx:id="bodyField" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        </GridPane>
     </center>
     <bottom>
         <HBox alignment="CENTER_RIGHT">
             <Label fx:id="errorLabel" HBox.hgrow="ALWAYS"/>
-            <Button text="Cancel" onAction="#cancel" alignment="CENTER_RIGHT"/>
-            <Button text="Send" onAction="#send" alignment="CENTER_RIGHT"/>
+            <Button text="Cancel" onAction="#cancel" alignment="CENTER_RIGHT">
+                <HBox.margin><Insets topRightBottomLeft="10.0" /></HBox.margin>
+            </Button>
+            <Button text="Send" onAction="#send" alignment="CENTER_RIGHT">
+                <HBox.margin><Insets topRightBottomLeft="10.0" /></HBox.margin>
+            </Button>
         </HBox>
     </bottom>
 

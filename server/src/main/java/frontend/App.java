@@ -34,9 +34,7 @@ public class App extends Application {
         Server server = Server.getServer(logger);
 
         executorService.execute(server);
-        stage.setOnCloseRequest((event) -> {
-            executorService.shutdownNow();
-        });
+        stage.setOnCloseRequest((event) -> executorService.shutdownNow());
     }
 
     private void setParameters(){

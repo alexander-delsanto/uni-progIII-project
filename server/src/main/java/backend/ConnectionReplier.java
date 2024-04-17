@@ -27,9 +27,7 @@ public class ConnectionReplier implements Runnable {
             try (PrintWriter writer = new PrintWriter(socket.getOutputStream(), true)) {
                 String receivedMessage = reader.readLine();
                 Message message = gson.fromJson(receivedMessage, Message.class);
-                System.out.println(message);
                 Message reply = replyToMessage(message);
-                System.out.println(reply);
                 writer.println(gson.toJson(reply));
             }
         } catch (IOException e) {
@@ -114,11 +112,16 @@ public class ConnectionReplier implements Runnable {
         }
         List<FileManager> recipientsFiles = new ArrayList<>();
         for (String recipient : toSend.recipients().split(",")) {
-            FileManager recipientFile = FileManager.get(recipient.trim());
-            if (recipientFile != null) {
-                recipientsFiles.add(recipientFile);
-            } else {
-                logger.log("Failed to access file manager for recipient: " + recipient);
+            try {
+                FileManager recipientFile = FileManager.get(recipient.trim());
+                if (recipientFile != null) {
+                    recipientsFiles.add(recipientFile);
+                } else {
+                    logger.log("Failed to access file manager for recipient: " + recipient);
+                }
+            } catch (IllegalArgumentException e) {
+                logger.log("Failed to send emails from " + message.user() + ": one or more recipients don't exist.");
+                return new Message(message.user(), message.operation(), e.getMessage(), null);
             }
         }
 

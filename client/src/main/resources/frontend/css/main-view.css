@@ -1,0 +1,50 @@
+.root {
+    -fx-font-family: 'Arial';
+    -fx-background-color: #eaeaea;
+}
+
+.SplitPane {
+    -fx-background-color: #ffffff;
+}
+
+.SplitPane .split-pane-divider {
+    -fx-background-color: #bbbbbb;
+    -fx-background-insets: 0 1 0 1;
+}
+
+.TabPane {
+    -fx-padding: 10;
+}
+
+.Tab {
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 5 10 5 10;
+}
+
+.Tab:selected {
+    -fx-background-color: #ddd;
+    -fx-font-weight: bold;
+}
+
+.ListView {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1;
+}
+
+.ListView .list-cell {
+    -fx-padding: 5 10;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #eeeeee;
+}
+
+.ListView .placeholder {
+    -fx-text-fill: #999999;
+    -fx-font-style: italic;
+}
+
+.Label {
+    -fx-text-fill: #333333;
+}

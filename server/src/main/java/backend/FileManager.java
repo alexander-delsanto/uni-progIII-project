@@ -15,7 +15,7 @@ public class FileManager {
     private static final String EMAIL_DIRECTORY = "emails/";
     private final ReadWriteLock rwLock = new ReentrantReadWriteLock();
     private final File file;
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     private FileManager(File file) {
         this.file = file;
@@ -26,7 +26,10 @@ public class FileManager {
             throw new IllegalArgumentException("Filename cannot be null.");
         }
         String filePath = EMAIL_DIRECTORY + filename + ".json";
-        return openedFileManager.computeIfAbsent(filePath, f -> new FileManager(new File(f)));
+        File file = new File(filePath);
+        if (!file.exists())
+            throw new IllegalArgumentException("One or more users do not exist.");
+        return openedFileManager.computeIfAbsent(filePath, f -> new FileManager(file));
     }
 
     public List<EmailMessage> getEmails() { return loadEmails(); }
@@ -68,7 +71,6 @@ public class FileManager {
             rwLock.writeLock().unlock();
         }
     }
-
 
     private void saveEmails(List<EmailMessage> emails) {
         try (Writer writer = new FileWriter(file, StandardCharsets.UTF_8)) {

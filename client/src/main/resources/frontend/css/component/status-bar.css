@@ -1,15 +1,24 @@
-#userInfoHBox, #statusInfoHBox {
-    -fx-background-color: #f0f0f0;
-    -fx-padding: 10;
-    -fx-border-color: #cccccc;
-    -fx-border-radius: 5;
+.HBox {
+    -fx-background-color: #f2f2f2;
+    -fx-padding: 5;
+    -fx-alignment: center-left;
 }
 
-.label {
+.Label {
+    -fx-text-fill: #333;
+    -fx-font-size: 12px; /* Smaller font size suitable for status information */
+}
+
+#userInfoHBox {
+    -fx-border-radius: 4; /* Rounded corners for the user info box */
+    -fx-background-radius: 4; /* Apply radius to the background */
+}
+
+#statusInfoHBox {
     -fx-font-weight: bold;
-    -fx-min-width: 40px;
+    -fx-border-radius: 4; /* Rounded corners for the status info box */
+    -fx-background-radius: 4; /* Apply radius to the background */
 }
-
 #statusLabel.online {
     -fx-text-fill: green;
 }

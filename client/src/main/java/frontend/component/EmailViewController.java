@@ -17,7 +17,7 @@ public class EmailViewController {
 
     @FXML
     private void initialize() {
-
+        emailView.visibleProperty().bind(mailBox.selectionExistsProperty());
         fromField.textProperty().bind(mailBox.getSelectedEmail().senderProperty());
         toField.textProperty().bind(mailBox.getSelectedEmail().recipientsProperty());
         subjectField.textProperty().bind(mailBox.getSelectedEmail().subjectProperty());
