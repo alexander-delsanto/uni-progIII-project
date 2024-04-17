@@ -3,7 +3,9 @@ package frontend;
 import backend.UpdateService;
 import frontend.util.StageWrapper;
 import javafx.application.Application;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import model.MailBox;
 import model.UserData;
 import model.message.EmailMessage;
@@ -14,12 +16,16 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class App extends Application {
-    private final int UPDATE_INTERVAL = 5;
     private static final int WIDTH = 550;
     private static final int HEIGHT = 400;
+    private boolean firstEmails = true;
+    int numNewEmails = 0;
 
     private StageWrapper stageWrapper;
     private final ScheduledExecutorService   executorService = Executors.newScheduledThreadPool(1);
+    private Alert alert;
+    private final MailBox mailBox = MailBox.getInstance();
+    private final UserData userData = UserData.getInstance();
 
     @Override
     public void start(Stage stage) {
@@ -43,16 +49,39 @@ public class App extends Application {
         stageWrapper.setWidth(1600);
         stageWrapper.setHeight(900);
 
+        initializeAlert();
         UpdateService updateService = new UpdateService(UserData.getInstance().getUser());
         updateService.setEndStatusListener(this::addNewEmails);
+        int UPDATE_INTERVAL = 5;
         executorService.scheduleAtFixedRate(updateService, 0, UPDATE_INTERVAL, TimeUnit.SECONDS);
     }
 
     private void addNewEmails(List<EmailMessage> emailMessages) {
         boolean online = emailMessages != null;
-        MailBox.getInstance().setOnline(online);
-        if (!online) return;
-        MailBox.getInstance().addEmails(UserData.getInstance().getUser(), emailMessages);
+        mailBox.setOnline(online);
+        if (!online || emailMessages.isEmpty()) return;
+
+        mailBox.addEmails(userData.getUser(), emailMessages);
+        if (firstEmails) {
+            firstEmails = false;
+            return;
+        }
+
+        numNewEmails += emailMessages.stream().filter(email ->
+                !email.sender().equals(userData.getUser())).toList().size();
+
+        if (numNewEmails > 0) {
+            alert.setHeaderText("You have " + numNewEmails + " new emails.");
+            alert.show();
+            numNewEmails = 0;
+        }
+
+    }
+
+    private void initializeAlert() {
+        alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("New emails notification");
+        alert.initOwner(stageWrapper.getStage());
     }
 
     private void setParameters() {

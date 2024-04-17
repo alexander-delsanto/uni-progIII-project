@@ -21,10 +21,14 @@ public class LoginController implements EndStatusListener<Pair<Boolean, String>>
     @FXML private Button loginButton;
     @FXML private Button registerButton;
     private String emailAddress;
-    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
     private final EmailValidator emailValidator = new EmailValidator();
     private EndStatusListener<String> listener = null;
     private boolean isProcessing = false;
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor(runnable -> {
+        Thread thread = new Thread(runnable);
+        thread.setDaemon(true);
+        return thread;
+    });
 
     @FXML
     private void login() {
@@ -60,7 +64,7 @@ public class LoginController implements EndStatusListener<Pair<Boolean, String>>
             isProcessing = false;
             updateUIForProcessing(false);
         }
-        executorService.shutdown();
+
     }
 
     private void updateUIForProcessing(boolean isProcessing) {

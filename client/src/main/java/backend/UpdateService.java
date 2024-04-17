@@ -1,7 +1,5 @@
 package backend;
 
-import model.MailBox;
-import model.UserData;
 import model.message.EmailMessage;
 import model.message.Message;
 

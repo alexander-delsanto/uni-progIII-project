@@ -1,6 +1,5 @@
 package backend;
 
-import interfaces.EndStatusListener;
 import javafx.util.Pair;
 import model.message.Message;
 
