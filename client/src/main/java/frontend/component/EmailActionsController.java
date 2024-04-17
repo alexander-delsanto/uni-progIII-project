@@ -32,7 +32,7 @@ public class EmailActionsController {
     private void initialize() {
         BooleanBinding emptySelection = mailBox.selectionExistsProperty().not();
         forwardButton.disableProperty().bind(emptySelection);
-        deleteButton.disableProperty().bind(emptySelection);
+        deleteButton.disableProperty().bind(emptySelection.or(mailBox.onlineProperty().not()));
 
         BooleanBinding invalidSelection = mailBox.getSelectedEmail().senderProperty().isEqualTo(userData.getUser());
         replyButton.disableProperty().bind(emptySelection.or(invalidSelection));
@@ -59,7 +59,7 @@ public class EmailActionsController {
     }
 
     private void openWindow(Window owner, Email formattedEmail) {
-        StageWrapper stageWrapper = new StageWrapper(null, "Mail Editor", 650, 450);
+        StageWrapper stageWrapper = new StageWrapper(null, "Mail Editor", 800, 600);
         stageWrapper.setModal(owner);
         stageWrapper.setIcon(MainViewController.class.getResource("assets/icon.png"));
 

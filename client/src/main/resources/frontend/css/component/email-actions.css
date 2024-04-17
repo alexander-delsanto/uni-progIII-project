@@ -1,3 +1,7 @@
+Button {
+    -fx-max-width: Infinity;
+}
+
 #deleteButton {
     -fx-text-fill: red;
     -fx-font-weight: bold;

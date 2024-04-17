@@ -72,7 +72,7 @@ public class App extends Application {
                 !email.sender().equals(userData.getUser())).toList().size();
 
         if (numNewEmails > 0) {
-            alert.setHeaderText("You have " + numNewEmails + " new emails.");
+            alert.setHeaderText("You have " + numNewEmails + " new email/s.");
             alert.show();
             numNewEmails = 0;
         }

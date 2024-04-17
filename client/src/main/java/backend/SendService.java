@@ -20,14 +20,14 @@ public class SendService extends ServiceRequester<String> {
     @Override
     public String callService() {
         if (email == null || !emailValidator.checkValidity(email.getRecipients())) {
-            return "Improper email address";
+            return "Improper email address.";
         }
         List<EmailMessage> messages = Collections.singletonList(email.toEmailMessage());
         Message message = new Message(user, Message.OP_SEND, "", messages);
         Message response = sendMessage(message);
 
         if (response == null) {
-            return "Couldn't reach server";
+            return "Couldn't reach server.";
         }
         return response.errorMessage();
     }

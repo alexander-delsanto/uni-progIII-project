@@ -23,7 +23,7 @@ public class AuthService extends ServiceRequester<Pair<Boolean, String>> {
         Message response = sendMessage(message);
         Pair<Boolean, String> res;
         if (response == null)
-            res = new Pair<>(false, "Cannot communicate with server.");
+            res = new Pair<>(false, "Couldn't reach server.");
         else if (response.errorMessage() == null)
             res = new Pair<>(true, null);
         else if (isLogin)

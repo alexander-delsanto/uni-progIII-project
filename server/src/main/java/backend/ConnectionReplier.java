@@ -22,11 +22,11 @@ public class ConnectionReplier implements Runnable {
 
     @Override
     public void run() {
-        logger.log("Connection established with " + socket.getInetAddress());
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
             try (PrintWriter writer = new PrintWriter(socket.getOutputStream(), true)) {
                 String receivedMessage = reader.readLine();
                 Message message = gson.fromJson(receivedMessage, Message.class);
+                logger.log("Connection established with " + message.user());
                 Message reply = replyToMessage(message);
                 writer.println(gson.toJson(reply));
             }
@@ -90,7 +90,8 @@ public class ConnectionReplier implements Runnable {
         List<EmailMessage> emailMessages = userFile.getEmails();
 
         int id = userFile.getNextId(emailMessages);
-        final List<EmailMessage> result = emailMessages.stream().filter((mail) -> mail.id() >= message.operation()).toList();
+        List<EmailMessage> result = emailMessages.stream().filter((mail) -> mail.id() >= message.operation()).toList();
+        logger.log("Sending " + result.size() + " emails to " + message.user());
         return new Message(message.user(), id, null, result);
     }
 
@@ -129,15 +130,16 @@ public class ConnectionReplier implements Runnable {
         for (FileManager recipientFile : recipientsFiles) {
             recipientFile.addEmails(Collections.singletonList(toSend));
         }
-        logger.log("Email sent successfully from " + message.user());
+        logger.log("Emails sent successfully from " + message.user() + " to " + toSend.recipients());
         return new Message(message.user(), Message.OP_SEND, null, null);
     }
 
     public Message handleDeleteEmail(Message message) {
-        logger.log("Deleting " + message.emailMessages().size() +  " emails for " + message.user());
+        logger.log("Deleting " + message.emailMessages().size() +  " email for " + message.user());
         FileManager userFile = FileManager.get(message.user());
         System.out.println("Got file manager for " + message.user() + "\n" + message.emailMessages());
         userFile.deleteEmails(message.emailMessages());
+        logger.log("Emails deleted successfully for " + message.user());
         return new Message(message.user(), message.operation(), null, null);
     }
 }
